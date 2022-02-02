@@ -26,4 +26,11 @@ public class OrderServiceImpl implements OrderService {
         return new Order(memberId, itemName, itemPrice, discountPrice);
     }//createOrder
 
+    /**
+     * 각기 다른 객체에서 호출 시 싱글톤 테스트용도
+     */
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
+
 }//class
