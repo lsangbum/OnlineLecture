@@ -6,6 +6,7 @@ import hello.core.member.Grade;
 import hello.core.member.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.aop.support.NameMatchMethodPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -31,6 +32,7 @@ public class AllBeanTest {
         int rateDiscountPrice = discountService.discount(member, 20000, "rateDiscountPolicy");
 
         assertThat(rateDiscountPrice).isEqualTo(2000);
+        NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
     }
 
     static class DiscountService {
