@@ -11,9 +11,7 @@ public class BeanLifeCycleTest {
     @Test
     public void lifeCycleTest() {
         ConfigurableApplicationContext ac = new AnnotationConfigApplicationContext(LifeCycleConfig.class);
-
         NetworkClient client = ac.getBean(NetworkClient.class);
-
         ac.close();
 
 
@@ -21,12 +19,15 @@ public class BeanLifeCycleTest {
 
     @Configuration
     static class LifeCycleConfig {
-        @Bean
+        //@Bean 의 destroyMethod 의 default 값은 (inferred) 즉 추론으로 close 나 shutdown 라는 이름의 메서드를 자동으로 호출 해준다.
+        @Bean(initMethod = "init", destroyMethod = "close")
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("https://hello-spring.dev");
             return networkClient;
         }
+
+
     }
 
 
